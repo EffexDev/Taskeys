@@ -81,6 +81,7 @@ csname = Jordan C
 ; "!wan20" WAN Access guide for NF20Mesh
 ; "!wan18" WAN Access guide for NF18Mesh
 ; "!confirmation" Adv eu that we have booked and inform of confirmation text
+; "!preempt" Adv we have booked an appointment without confirmation
 
 ;=========== Prov Scripts ================
 ;
@@ -143,20 +144,50 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ;=========== Queue Hotstrings =============
 
-:O:!call::[b][u]Caller:[/u][/b] {Enter}{enter}[b][u]ID Check:[/u][/b] Yes{Enter}{Enter}[b][u]Reason for call:[/u][/b] {Enter}{Enter}[b][u]Troubleshooting/Observations:[/u][/b]{Enter}-
+:C10:!call::
+{
+[b][u]Caller:[/u][/b]
+[b][u]ID Check:[/u][/b] Yes
+[b][u]Reason for call:[/u][/b]
+[b][u]Troubleshooting/Observations:[/u][/b]
+}
 
-:O:!ob::[b][u]Called:[/u][/b] {Enter}{Enter}[b][u]ID Check:[/u][/b] Yes {Enter}[b][u]Advised of OBR:[/u][/b] Yes {Enter}{Enter}[b][u]Reason for call:[/u][/b] {Enter}{Enter}[u][b]Troubleshooting/Observations:[/b][/u]{Enter}-
+:C10:!ob::
+{
+[b][u]Called:[/u][/b]
+[b][u]ID Check:[/u][/b] Yes 
+[b][u]Advised of OBR:[/u][/b] Yes 
+[b][u]Reason for call:[/u][/b]
+[u][b]Troubleshooting/Observations:[/b][/u]
+}
 
-:O:!oob::Called: {Enter}{Enter}ID Check: Yes {Enter}Advised of OBR: Yes {Enter}{Enter}Reason for call: {Enter}{Enter}Troubleshooting/Observations:{Enter}-
+:C10:!oob::
+{
+Called:
+ID Check: Yes 
+Advised of OBR: Yes 
+Reason for call: 
+Troubleshooting/Observations:
+}
 
-:O:!ocall::Caller: {Enter}{enter}ID Check: Yes{Enter}{Enter}Reason for call: {Enter}{Enter}Troubleshooting/Observations:{Enter}-
+:C10:!ocall::
+{
+Caller: 
+ID Check: Yes
+Reason for call: 
+Troubleshooting/Observations:
+}
 
 :O:!end::[b][u]EoC.[/u][/b] 
 
 :O:!oend::EoC.
 
-:O:!optinoc::[b][u]Called OptiNOC[/u][/b]{Enter}[b][u]Agent:[/u][/b] {Enter}[b][u]Ticket:[/u][/b] {Enter}- 
-
+:C10:!optinoc::
+{
+[b][u]Called OptiNOC[/u][/b]
+[b][u]Agent:[/u][/b]
+[b][u]Ticket:[/u][/b] 
+}
 ;=========== CSP Hotstrings ===============
 ^!r::
 Reload
@@ -254,6 +285,8 @@ return
 
 :O:!confirmation::I have raised this appointment for you.{Enter 2}You should receive a confirmation text within 24 hours. {Enter}If you do not receive this text please give us a call and let us know and we will look into it.{Enter 2}
 
+:O:!preempt::In order to ensure that your NBN ticket stays open I have booked a tentative appointment for you.{Enter 2}The appointment date/time is:{Enter 2}If this appointment does not suit you, please give us a call and we can rewchedule.{Enter 2} 
+
 return
 
 ;=========== OTRS Hotstrings ===============
@@ -335,16 +368,6 @@ return
 	{
 		Run, C:\Program Files\Slack\Slack.exe
 	}
-	
-	if WinExist("ahk_exe outlook.exe")
-	{
-		WinActivate
-	}
-	else
-	{
-		Run, OUTLOOK.EXE
-	}
-		
 	if WinExist("ahk_exe C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
 	{
 		WinActivate
@@ -353,7 +376,6 @@ return
 	{
 		Run, chrome.exe
 	}
-	
 	if WinExist("ahk_exe C:\Program Files (x86)\Notepad++\notepad++.exe")
 	{
 		WinActivate
@@ -363,19 +385,13 @@ return
 		Run, notepad++.exe
 	}
 	sleep 100
-	WinMove,ahk_exe notepad++.exe,,1913,0,974,1047
-	WinMove,ahk_exe Slack.exe,,2880,0,958,1038
-	WinMove,ahk_exe chrome.exe,,-8,-8,1936,1056
-	WinMove,ahk_exe WideQueue.exe,,2597,2,280,96
-	sleep 200
-	
 Return
 
 ; ===============================
 ;  Fault Signature
 ; ===============================
 ::!sign::
-	global scname
+	global csname
 	SendInput Regards,{Enter}%csname%
 	SendInput {Tab 1}{Space}
 	SendInput {Tab 3}{Enter}
@@ -925,3 +941,4 @@ exit
 ;		- added confirmation template for telling eu they should expect an SMS from NBN
 ;		- updated superlookup with another auspost RegEx lookup
 ;		- updated the App open and close hotkeys to not be billing company specific
+;   - added template for preemptive appt bookings to keep NBN ticket open
