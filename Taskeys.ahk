@@ -271,7 +271,18 @@ return
 
 :O:!reseat::Please re-seat the SIM card in the device and then try to test the service again.{Enter 2}To do this:{enter}1. Power the device off{Enter}2. Remove the SIM card from the device{Enter}3. Place the SIM card back into the device{Enter}4. Power the device back up{Enter 2}If you are still unable to use mobile data after this please let us know.{Enter 2}
 
-:O:!obresolved::[b][u]Called:[/u][/b] {Enter 2}[b][u]ID Check:[/u][/b] No{Enter}[b][u]Advised of OBR:[/u][/b] No{Enter 2}[b][u]Reason for call:[/u][/b] Follow Up{Enter 2}[u][b]Troubleshooting/Observations:[/b][/u]{Enter}- adv eu following up on fault{Enter}- eu adv fault resolved{Enter}- eu happy to close{Enter}[b][u]EoC.[/u][/b]{Enter}
+:C10:!obresolved::
+{
+[b][u]Called:[/u][/b] 
+[b][u]ID Check:[/u][/b] No
+[b][u]Advised of OBR:[/u][/b] No
+[b][u]Reason for call:[/u][/b] Follow Up
+[u][b]Troubleshooting/Observations:[/b][/u]
+- adv eu following up on fault
+- eu adv fault resolved-
+- eu happy to close
+[b][u]EoC.[/u][/b]{Enter}
+}
 
 :O:!dontkick::I noticed from our test history that you ran a kick connection test from the MyAussie app earlier today.{Enter 2}The wording in the app can be a little vague, but this test will disconnect your internet completely until 15 minutes have elapsed and your router reconnects, or you powercycle the device.{Enter 2}As your service is back online, please let us know if you are happy to close this fault.{Enter 2}
 
