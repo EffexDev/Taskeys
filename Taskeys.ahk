@@ -279,7 +279,7 @@ return
 [b][u]Reason for call:[/u][/b] Follow Up
 [u][b]Troubleshooting/Observations:[/b][/u]
 - adv eu following up on fault
-- eu adv fault resolved-
+- eu adv fault resolved
 - eu happy to close
 [b][u]EoC.[/u][/b]{Enter}
 }
